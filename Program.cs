@@ -1,52 +1,81 @@
 ﻿using System;
 
-namespace Lab3
+enum Day
 {
-    class Program
+    Понедельник,
+    Вторник,
+    Среда,
+    Четверг,
+    Пятница,
+    Суббота,
+    Воскресенье
+}
+
+enum Time
+{
+    Утро,
+    День,
+    Вечер,
+    Ночь
+}
+
+public class Program
+{
+
+
+    public static void Main()
     {
-        static void Main(string[] args)
+        string result = "";
+        Console.Write("Введите день недели: ");
+        string day = Console.ReadLine();
+
+        switch (day)
         {
-            Console.Write("Введите число дня недели: ");
-            int num1 = Convert.ToInt16(Console.ReadLine());
-            string num11 = null;
-            switch (num1)
-            {
-                case 1: num11 = "Monday"; 
-                    break;
-                case 2: num11 = "Tuesday"; 
-                    break;
-                case 3: num11 = "Wednesday"; 
-                    break;
-                case 4: num11 = "Thursday"; 
-                    break;
-                case 5: num11 = "Friday"; 
-                    break;
-                case 6: num11 = "Saturday"; 
-                    break;
-                case 7: num11 = "Sunday"; 
-                    break;
-                default: Console.WriteLine("ERROR"); 
-                    break;
-            }
-            Console.ReadKey();
+            case "Понедельник":
+                result += "Сейчас " + Day.Понедельник; break;
+            case "Вторник":
+                result += "Сейчас " + Day.Вторник; break;
+            case "Среда":
+                result += "Сейчас " + Day.Среда; break;
+            case "Четверг":
+                result += "Сейчас " + Day.Четверг; break;
+            case "Пятница":
+                result += "Сейчас " + Day.Пятница; break;
+            case "Суббота":
+                result += "Сейчас " + Day.Суббота; break;
+            case "Воскресенье":
+                result += "Сейчас " + Day.Воскресенье; break;
+            default: Console.WriteLine("Ошибка"); System.Environment.Exit(1); break;
+        }
 
-            Console.Write("Введите час (0-23): ");
-            int num2 = Convert.ToInt16(Console.ReadLine());
-            string num22 = null;
-            switch (num2)
+        Console.Write("Введите время в часах: ");
+        if (int.TryParse(Console.ReadLine(), out int time))
+        {
+            if (time >= 0 && time <= 6)
             {
-                case 0 or <=6: num22 = "Ночь"; 
-                    break;
-                case 7 or <=12: num22 = "Утро"; 
-                    break;
-                case 13 or <= 18: num22 = "День";
-                    break;
-                case 19 or <= 23: num22 = "Вечер";
-                    break;
+                Console.WriteLine(result + ", " + Time.Ночь);
             }
-            Console.ReadKey();
-
-            Console.WriteLine($"Сейчас <{num11}>, <{num22}>");
+            else if (time >= 7 && time <= 12)
+            {
+                Console.WriteLine(result + ", " + Time.Утро);
+            }
+            else if (time >= 13 && time <= 18)
+            {
+                Console.WriteLine(result + ", " + Time.День);
+            }
+            else if (time >= 19 && time <= 23)
+            {
+                Console.WriteLine(result + ", " + Time.Вечер);
+            }
+            else
+            {
+                Console.WriteLine("Ошибка");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Ошибка");
+            System.Environment.Exit(1);
         }
     }
 }
